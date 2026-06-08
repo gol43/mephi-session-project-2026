@@ -1,0 +1,97 @@
+    1  whoami
+    2  hostname
+    3  uname - a
+    4  uname -a
+    5  cat /etc/fedora-release
+    6  nmcli device status
+    7  nmcli connection show
+    8  nmcli device show
+    9  ip addr show
+   10  ip route show
+   11  lsblk -f
+   12  fdisk -l | grep -E 'Disk /dev/sd'
+   13  ls /dev/sd*
+   14  getenforce
+   15  id
+   16  dnf list installed | grep -E 'nginx|tcpdump|libcap'
+   17  sudo -i
+   18  ping -c 4 8.8.8.8 > /tmp/network_check.txt
+   19  ping -c 4 192.168.1.1 >> /tmp/network_check.txt
+   20  cat /tmp/network_check.txt
+   21  sudo nmcli connection modify "Проводное подключение 1" ipv4.method auto
+   22  sudo nmcli connection up "Проводное подключение 1"
+   23  ip route | grep default
+   24  sudo nmcli connection modify "Проводное подключение 1" ipv4.addresses 192.168.1.100/24
+   25  sudo nmcli connection modify "Проводное подключение 1" ipv4.gateway 192.168.1.1
+   26  sudo nmcli connection modify "Проводное подключение 1" ipv4.dns "8.8.8.8"
+   27  sudo nmcli connection modify "Проводное подключение 1" ipv4.method manual
+   28  sudo nmcli connection modify "Проводное подключение 1" ipv4.ignore-auto-dns yes
+   29  sudo nmcli connection down "Проводное подключение 1" && sudo nmcli connection up "Проводное подключение 1"
+   30  ping -c 4 8.8.8.8 > /tmp/network_check.txt
+   31  ping -c 4 192.168.1.1 >> /tmp/network_check.txt
+   32  cat /tmp/network_check.txt
+   33  sudo ip addr add 192.168.1.1/32 dev lo
+   34  sudo ip addr add 8.8.8.8/32 dev lo
+   35  ping -c 4 8.8.8.8 > /tmp/network_check.txt
+   36  ping -c 4 192.168.1.1 >> /tmp/network_check.txt
+   37  cat /tmp/network_check.txt
+   38  sudo dnf makecache
+   39  sudo dnf install -y nginx tcpdump libcap-ng-utils
+   40  nmcli connection show
+   41  sudo nmcli connection modify "Проводное подключение 1" ipv4.method auto
+   42  sudo nmcli connection up "Проводное подключение 1"
+   43  sudo dnf makecache
+   44  sudo dnf install -y nginx tcpdump libcap-ng-utils
+   45  sudo nmcli connection modify "Проводное подключение 1" ipv4.addresses 192.168.1.100/24 ipv4.gateway 192.168.1.1 ipv4.dns "8.8.8.8" ipv4.method manual
+   46  sudo nmcli connection up "Проводное подключение 1"
+   47  rpm -qa | grep -E "nginx|tcpdump|libcap-ng"
+   48  dnf download --destdir=/tmp tcpdump
+   49  sudo rpm -Uvh /tmp/tcpdump-*.rpm
+   50  sudo dnf install -y dnf-plugins-core 
+   51  tcpdump --version
+   52  rpm -qa | grep -E "nginx|tcpdump|libcap-ng"
+   53  stat /data/mephi-web
+   54  getenforce
+   55  ls -Zd /data/mephi-web
+   56  getcap /usr/sbin/tcpdump
+   57  id mephi-admin
+   58  getent group mephi-devs
+   59  lsblk
+   60  sudo fdisk /dev/sdb
+   61  cat /etc/fstab | grep MEPHI_DATA
+   62  df -h | grep MEPHI_DATA
+   63  systemctl is-active nginx
+   64  systemctl is-enabled nginx
+   65  ls -l /tmp/nginx_recent_logs.txt
+   66  sudo sed -i '$d' /etc/fstab
+   67  sudo mount -a
+   68  df -h | grep MEPHI_DATA
+   69  sudo journalctl -u nginx --since "5 minutes ago" > /tmp/nginx_recent_logs.txt
+   70  ls -l /tmp/nginx_recent_logs.txt
+   71  cat /etc/fstab | grep MEPHI_DATA
+   72  sudo blkid | grep sdb
+   73  sudo mount /dev/sdb1 /data/mephi-web && df -h | grep mephi-web
+   74  sudo systemctl daemon-reload
+   75  sudo mount -a
+   76  sudo -l -U mephi-admin
+   77  ls -Zd /data/mephi-web
+   78  getcap /usr/sbin/tcpdump
+   79  curl -s http://localhost
+   80  sudo -u mephi-admin tcpdump --help >/dev/null && echo "tcpdump работает от юзера"
+   81  sudo -l -U mephi-admin | grep "NOPASSWD"
+   82  nothing
+   83  sudo grep "pam_listfile" /etc/pam.d/sshd /etc/pam.d/login
+   84  echo "mephi-admin ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/mephi-admin
+   85  echo "mephi-admin:P@ssw0rd2026" | sudo chpasswd
+   86  echo "mephi-admin ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/mephi-admin
+   87  sudo sed -i 's/account required pam_listfile.so/auth required pam_listfile.so/g' /etc/pam.d/sshd /etc/pam.d/login && sudo systemctl restart sshd
+   88  ls - ld /data/mephi-web
+   89  ls -ld /data/mephi-web
+   90  sestatus
+   91  ls -Z /data/mephi-web
+   92  getcap /usr/sbin/tcpdump
+   93  sudo -u mephi-admin tcpdump --help
+   94  su - root
+   95  ssh root@localhost
+   96  sudo journalctl -u sshd --since "5 minutes ago" | grep "pam_listfile" || sudo tail -n 20 /var/log/secure | grep "pam_listfile"
+   97  history > ~/project_history.txt
